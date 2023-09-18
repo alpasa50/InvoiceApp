@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-function App() {
+function Sidebar() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="sidebar">
+      <h2>PDF Invoicer</h2>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/invoice">Create Invoice</Link>
+        </li>
+      </ul>
     </div>
   );
 }
 
-export default App;
+function Home() {
+  return <h1>Welcome to PDF Invoicer</h1>;
+}
+
+function InvoiceForm() {
+  return (
+    <div className="invoice-form">
+      <h1>Create Invoice</h1>
+      {/* Add your invoice form components here */}
+      <button onClick={generatePDF}>Generate PDF</button>
+    </div>
+  );
+
+  function generatePDF() {
+    // Add code to generate PDF here using the 'react-pdf' library.
+  }
+}
+
+export default Sidebar;
