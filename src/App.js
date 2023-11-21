@@ -7,7 +7,7 @@ function Sidebar() {
       <h2>PDF Invoicer</h2>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/">Home TEST</Link>
         </li>
         <li>
           <Link to="/invoice">Create Invoice</Link>
