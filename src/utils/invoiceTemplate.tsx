@@ -1,9 +1,14 @@
 import React from 'react';
 import styles from './InvoiceTemplate.module.css'
+import InvoiceTemplateProps from './interfaces/InvoiceTemplateProps';
 
-export const InvoiceTemplate: React.FC = () => {
+export const InvoiceTemplate: React.FC<InvoiceTemplateProps> = ({data}) => {
 
-  const data = [
+  const { fecha, numeroFactura, facturarA, direccion, telefono, items } = data;
+  console.log(direccion)
+
+
+  const datas = [
     { cantidad: 1, descripcion: 'Referido venta. cierre 9610, Ona Residences Unidad 1E Edif. 8, Cliente: Massiel Perez / Michelle Sved', precioPorUnidad: 1000.00, valor: 2000.00 },
     { cantidad: 1, descripcion: 'Referido venta. cierre 9610, Ona Residences Unidad 1E Edif. 8, Cliente: Massiel Perez / Michelle Sved', precioPorUnidad: 1000.00, valor: 2000.00 },
     { cantidad: 1, descripcion: 'Referido venta. cierre 9610, Ona Residences Unidad 1E Edif. 8, Cliente: Massiel Perez / Michelle Sved', precioPorUnidad: 1000.00, valor: 2000.00 },
@@ -33,13 +38,13 @@ export const InvoiceTemplate: React.FC = () => {
       </section>
       <div className={styles.data}>
         <h5 style={{ fontWeight: 'bold' }}>RNC: 12-12123-1</h5>
-        <h5 style={{ fontStyle: 'normal', fontWeight: 'normal' }}>Dirección: </h5>
+        <h5 style={{ fontStyle: 'normal', fontWeight: 'normal' }}>Dirección: {direccion}</h5>
         <h5 style={{ fontStyle: 'normal', fontWeight: 'normal', marginTop: -20 }}>Santo Domingo </h5>
-        <h5 style={{ fontStyle: 'normal', fontWeight: 'normal' }}>Telefono: </h5>
+        <h5 style={{ fontStyle: 'normal', fontWeight: 'normal' }}>Telefono: {telefono}</h5>
         <table>
           <tr>
             <td style={{ fontWeight: 'bold' }}>FECHA:</td>
-            <td>01/12/2023</td>
+            <td>{fecha.toLocaleDateString()}</td>
             <td style={{ fontWeight: 'bold', textAlign: 'left' }}>Nº DE FACTURA:</td>
             <td>B0100000002</td>
           </tr>
@@ -55,13 +60,7 @@ export const InvoiceTemplate: React.FC = () => {
           </tr>
           <tr>
             <td style={{ fontWeight: 'bold', textAlign: 'left' }}>Facturar a:</td>
-            <td style={{ width: '30%' }}>TRADESDHOMES, S.R.L.
-              RNC: 132147618
-              <br />Dirección: Autopista San Isidro No. 2,
-              Plaza Mónaco, Local 2-8
-              Santo Domingo Este.
-              <br />Teléfono: 809-534-5059
-            </td>
+            <td style={{ width: '30%' }}>{data.facturarA.split('\\n').map((line, index) => <div key={index}>{line}</div>)}</td>
           </tr>
         </table>
         
@@ -75,12 +74,12 @@ export const InvoiceTemplate: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-          {data.map((item, index) =>(
+          {items.map((items, index) =>(
               <tr key={index}>
-              <td>{item.cantidad}</td>
-              <td>{item.descripcion}</td>
-              <td>{item.precioPorUnidad}</td>
-              <td>{item.valor}</td>
+              <td>{items.cantidad}</td>
+              <td>{items.descripcion}</td>
+              <td>{items.precioPorUnidad}</td>
+              <td>{items.valor}</td>
               </tr>
             ))}
             
